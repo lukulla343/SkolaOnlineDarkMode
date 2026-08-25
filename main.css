@@ -1,14 +1,8 @@
-/* ==UserStyle==
-@name         ŠkolaOnline Dark mode
-@version      20260824.22.41
-@namespace    ?
-@description  Dark mode UI for School schedule
-@license      No License
-==/UserStyle== */
+/* ==========================================================================
+   Bakaláři SOL — Dark Mode
+   Covers: aplikace.skolaonline.cz (SOL) + www.skolaonline.cz (marketing/login)
+   ========================================================================== */
 
-/* Bakaláři SOL - Dark Mode */
-
-@-moz-document domain("skolaonline.cz"), domain("bakalari.cz") {
 :root {
   --bg-main: #1a1b1e;
   --bg-panel: #232427;
@@ -25,13 +19,18 @@
   --link-color: #6fa8f5;
 }
 
+
+/* ==========================================================================
+   1. SOL — base layout
+   ========================================================================== */
+
 html, body, .sol-page, .sol-body, .sol-body-content-wrapper,
 .top_frame, .bottom_frame, .content_frame, .main_content_frame {
   background-color: var(--bg-main) !important;
   color: var(--text-main) !important;
 }
 
-/* --- Top header bar (logo + "ŠKOLA ONLINE" + school name) --- */
+/* Top header bar (logo + "ŠKOLA ONLINE" + school name) */
 .top-header,
 .main-menu.publicweb,
 header,
@@ -54,7 +53,11 @@ header,
   font-weight: normal !important;
 }
 
-/* --- Left sidebar --- */
+
+/* ==========================================================================
+   2. SOL — left sidebar
+   ========================================================================== */
+
 .left_frame, .sol-body-left,
 .left_frame_panel, .left_frame_area,
 .left_frame_area_header,
@@ -83,7 +86,11 @@ header,
   background-color: var(--bg-hover) !important;
 }
 
-/* --- Content header --- */
+
+/* ==========================================================================
+   3. SOL — content header, form inputs, labels
+   ========================================================================== */
+
 .sol-body-content-header,
 .sol-body-content-header-title,
 .sol-body-content-top {
@@ -92,7 +99,6 @@ header,
   border-color: var(--border-color) !important;
 }
 
-/* --- Class dropdown selector / inputs --- */
 .InputField, select, input[type="text"] {
   background-color: var(--bg-elevated) !important;
   color: var(--text-main) !important;
@@ -103,7 +109,12 @@ header,
   color: var(--text-main) !important;
 }
 
-/* --- Generic checkboxes and radio buttons (fallback) --- */
+
+/* ==========================================================================
+   4. SOL — checkboxes & radio buttons
+   ========================================================================== */
+
+/* Generic fallback (native rendering) */
 input[type="checkbox"],
 input[type="radio"] {
   appearance: none !important;
@@ -151,7 +162,7 @@ input[type="radio"]:checked::after {
   background-color: #ffffff;
 }
 
-/* --- Radio buttons: Týden / Měsíc (specific IDs, higher priority) --- */
+/* Radio buttons: Týden / Měsíc (specific IDs, higher priority) */
 #calendarPart_kalendar_RBSelectionMode_0,
 #calendarPart_kalendar_RBSelectionMode_1 {
   appearance: none !important;
@@ -184,7 +195,7 @@ input[type="radio"]:checked::after {
   background-color: #ffffff;
 }
 
-/* --- SpaceBeforeButton checkboxes (Zobrazit sobotu/neděli, Zobrazit názvy skupin) --- */
+/* SpaceBeforeButton checkboxes (Zobrazit sobotu/neděli, Zobrazit názvy skupin) */
 .SpaceBeforeButton,
 label.SpaceBeforeButton {
   color: var(--text-main) !important;
@@ -223,7 +234,101 @@ span.SpaceBeforeButton input[type="checkbox"]:checked::after {
   transform: rotate(45deg);
 }
 
-/* --- Mini calendar (left panel) --- */
+/* Checkbox/radio drawn via a <label>'s ::before/::after (SOL renders the
+   visible box on the sibling <label>, not on the <input> itself — no
+   dependency on the site's SVG icon files) */
+body input[type=checkbox] + label {
+  background-image: none !important;
+  position: relative !important;
+}
+
+body input[type=checkbox] + label::before {
+  content: "" !important;
+  display: inline-block !important;
+  position: absolute !important;
+  left: 0 !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  width: 14px !important;
+  height: 14px !important;
+  background-color: var(--bg-elevated) !important;
+  border: 1px solid var(--text-dim) !important;
+  border-radius: 3px !important;
+  box-sizing: border-box !important;
+}
+
+body input[type=checkbox]:checked + label::after {
+  content: "" !important;
+  position: absolute !important;
+  left: 4px !important;
+  top: 50% !important;
+  width: 4px !important;
+  height: 8px !important;
+  margin-top: -6px !important;
+  border: solid #ffffff !important;
+  border-width: 0 2px 2px 0 !important;
+  transform: rotate(45deg) !important;
+}
+
+body input[type=checkbox]:checked + label::before {
+  background-color: var(--accent) !important;
+  border-color: var(--accent) !important;
+}
+
+body input[type=checkbox]:checked:hover + label::before {
+  background-color: #6fa8f5 !important;
+  border-color: #6fa8f5 !important;
+}
+
+/* Radio buttons: Týden / Měsíc, same technique */
+body input[type=radio] + label {
+  background-image: none !important;
+  position: relative !important;
+}
+
+body input[type=radio] + label::before {
+  content: "" !important;
+  display: inline-block !important;
+  position: absolute !important;
+  left: 0 !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  width: 14px !important;
+  height: 14px !important;
+  background-color: var(--bg-elevated) !important;
+  border: 1px solid var(--text-dim) !important;
+  border-radius: 50% !important;
+  box-sizing: border-box !important;
+}
+
+body input[type=radio]:checked + label::before {
+  background-color: var(--bg-elevated) !important;
+  border-color: var(--accent) !important;
+}
+
+body input[type=radio]:checked + label::after {
+  content: "" !important;
+  position: absolute !important;
+  left: 4px !important;
+  top: 50% !important;
+  width: 6px !important;
+  height: 6px !important;
+  margin-top: -3px !important;
+  border-radius: 50% !important;
+  background-color: var(--accent) !important;
+}
+
+body input[type=radio]:checked:hover + label::before,
+body input[type=radio]:checked:hover + label::after {
+  border-color: #6fa8f5 !important;
+  background-color: #6fa8f5 !important;
+}
+
+
+/* ==========================================================================
+   5. SOL — mini calendar (left panel)
+   ========================================================================== */
+
 .igcal_Control, .ig_Control {
   background-color: var(--bg-panel) !important;
   color: var(--text-main) !important;
@@ -286,7 +391,11 @@ span.SpaceBeforeButton input[type="checkbox"]:checked::after {
   filter: invert(0.85) !important;
 }
 
-/* --- Rozvrh (timetable) table --- */
+
+/* ==========================================================================
+   6. SOL — rozvrh (timetable) table
+   ========================================================================== */
+
 .DctTable, #CCADynamicCalendarTable {
   background-color: var(--bg-main) !important;
   border-color: var(--border-color) !important;
@@ -354,7 +463,30 @@ span.SpaceBeforeButton input[type="checkbox"]:checked::after {
   border-color: var(--border-color) !important;
 }
 
-/* --- Footer (address block + customer support block) --- */
+/* Tooltip popup (overlib) */
+#overDiv,
+#overDiv *,
+.KuvTooltip,
+.KuvTooltip *,
+[id^="overDiv"],
+[id^="overDiv"] * {
+  background-color: var(--bg-elevated) !important;
+  color: var(--text-main) !important;
+  border-color: var(--border-color) !important;
+}
+
+div[style*="visibility"] table,
+div[style*="visibility"] td,
+div[style*="visibility"] tr {
+  background-color: var(--bg-elevated) !important;
+  color: var(--text-main) !important;
+}
+
+
+/* ==========================================================================
+   7. SOL — footer, generic links/tables, notifications
+   ========================================================================== */
+
 footer, .sol-body-footer, .contact {
   background-color: var(--bg-panel) !important;
   color: var(--text-dim) !important;
@@ -376,7 +508,6 @@ footer a, .help,
   color: var(--link-color) !important;
 }
 
-/* Generic link/table fallback */
 a {
   color: var(--link-color) !important;
 }
@@ -390,112 +521,10 @@ table {
   color: var(--text-main) !important;
 }
 
-/* --- Tooltip popup (overlib) --- */
-#overDiv,
-#overDiv *,
-.KuvTooltip,
-.KuvTooltip *,
-[id^="overDiv"],
-[id^="overDiv"] * {
-  background-color: var(--bg-elevated) !important;
-  color: var(--text-main) !important;
-  border-color: var(--border-color) !important;
-}
 
-div[style*="visibility"] table,
-div[style*="visibility"] td,
-div[style*="visibility"] tr {
-  background-color: var(--bg-elevated) !important;
-  color: var(--text-main) !important;
-}
-
-/* --- Checkbox: draw the box via ::before, checkmark via ::after, both centered the same way --- */
-body input[type=checkbox] + label {
-  background-image: none !important;
-  position: relative !important;
-}
-
-body input[type=checkbox] + label::before {
-  content: "" !important;
-  display: inline-block !important;
-  position: absolute !important;
-  left: 0 !important;
-  top: 50% !important;
-  transform: translateY(-50%) !important;
-  width: 14px !important;
-  height: 14px !important;
-  background-color: var(--bg-elevated) !important;
-  border: 1px solid var(--text-dim) !important;
-  border-radius: 3px !important;
-  box-sizing: border-box !important;
-}
-
-body input[type=checkbox]:checked + label::after {
-  content: "" !important;
-  position: absolute !important;
-  left: 4px !important;
-  top: 50% !important;
-  width: 4px !important;
-  height: 8px !important;
-  margin-top: -6px !important;
-  border: solid #ffffff !important;
-  border-width: 0 2px 2px 0 !important;
-  transform: rotate(45deg) !important;
-}
-
-body input[type=checkbox]:checked + label::before {
-  background-color: var(--accent) !important;
-  border-color: var(--accent) !important;
-}
-
-body input[type=checkbox]:checked:hover + label::before {
-  background-color: #6fa8f5 !important;
-  border-color: #6fa8f5 !important;
-}
-
-/* --- Radio buttons: Týden / Měsíc, drawn via ::before/::after, no SVG dependency --- */
-body input[type=radio] + label {
-  background-image: none !important;
-  position: relative !important;
-}
-
-body input[type=radio] + label::before {
-  content: "" !important;
-  display: inline-block !important;
-  position: absolute !important;
-  left: 0 !important;
-  top: 50% !important;
-  transform: translateY(-50%) !important;
-  width: 14px !important;
-  height: 14px !important;
-  background-color: var(--bg-elevated) !important;
-  border: 1px solid var(--text-dim) !important;
-  border-radius: 50% !important;
-  box-sizing: border-box !important;
-}
-
-body input[type=radio]:checked + label::before {
-  background-color: var(--bg-elevated) !important;
-  border-color: var(--accent) !important;
-}
-
-body input[type=radio]:checked + label::after {
-  content: "" !important;
-  position: absolute !important;
-  left: 4px !important;
-  top: 50% !important;
-  width: 6px !important;
-  height: 6px !important;
-  margin-top: -3px !important;
-  border-radius: 50% !important;
-  background-color: var(--accent) !important;
-}
-
-body input[type=radio]:checked:hover + label::before,
-body input[type=radio]:checked:hover + label::after {
-  border-color: #6fa8f5 !important;
-  background-color: #6fa8f5 !important;
-}
+/* ==========================================================================
+   8. Scrollbar
+   ========================================================================== */
 
 ::-webkit-scrollbar {
   width: 8px !important;
@@ -518,6 +547,124 @@ body input[type=radio]:checked:hover + label::after {
 ::-webkit-scrollbar-corner {
   background-color: var(--bg-main) !important;
 }
+
+
+/* ==========================================================================
+   9. skolaonline.cz — global / UIkit primitives
+   ========================================================================== */
+
+.uk-svg,
+.uk-svg:not(.uk-preserve) [fill*="#"]:not(.uk-preserve) {
+  fill: rgb(86, 105, 113) !important;
+}
+
+.uk-navbar-container:not(.uk-navbar-transparent) {
+  background-color: var(--bg-panel) !important;
+  color: var(--text-main) !important;
+}
+
+.uk-navbar .tm-button-login .uk-button {
+  background-color: #02b589 !important;
+  color: var(--text-main) !important;
+}
+
+.uk-navbar-nav {
+  color: #ffffff !important;
+}
+
+.uk-navbar-nav > li > a {
+  color: #ffffff !important;
+}
+
+.uk-width-expand.uk-text-right,
+.uk-width-expand.uk-text-right a {
+  color: #ffffff !important;
+}
+
+.uk-panel.uk-text-small.tm-signup.uk-text-center,
+.uk-panel.uk-text-small.tm-signup.uk-text-center a {
+  color: #ffffff !important;
+}
+
+.uk-drop.uk-navbar-dropdown.uk-open,
+.uk-drop.uk-navbar-dropdown.uk-open a {
+  background-color: var(--bg-panel) !important;
+  color: #ffffff !important;
+  border-color: var(--border-color) !important;
+}
+
+.uk-input,
+.uk-select,
+.uk-textarea {
+  background-color: var(--bg-elevated) !important;
+  color: var(--text-main) !important;
+  border-color: var(--border-color) !important;
+}
+
+.uk-input::placeholder,
+.uk-textarea::placeholder {
+  color: var(--text-dim) !important;
+}
+
+.uk-input:focus,
+.uk-select:focus,
+.uk-textarea:focus {
+  border-color: var(--accent) !important;
+  background-color: var(--bg-elevated) !important;
+  color: var(--text-main) !important;
+}
+
+.uk-search-input {
+  color: #ffffff !important;
+}
+
+.uk-search-default:has(.uk-search-icon-flip) .uk-search-input {
+  background-color: #1b1d20 !important;
+}
+
+.uk-button {
+  color: #ffffff !important;
+}
+
+.uk-offcanvas-flip .uk-open > .uk-offcanvas-bar {
+  background-color: #1b1d20 !important;
+}
+
+.uk-nav li > a {
+  color: #ffffff !important;
+}
+
+/* Generic section/background/typography defaults */
+.uk-section-default {
+  background-color: #1b1d20 !important;
+  color: var(--text-main) !important;
+}
+
+.uk-section-muted {
+  display: none !important;
+}
+
+.uk-section {
+  color: #ffffff !important;
+}
+
+.uk-section > :last-child {
+  background-color: #1b1d20 !important;
+}
+
+.uk-background-center-center {
+  background-color: #1b1d20 !important;
+}
+
+.uk-h2,
+b, strong {
+  color: #ffffff !important;
+}
+
+
+/* ==========================================================================
+   10. skolaonline.cz — footer
+   ========================================================================== */
 
 .tm-footer.uk-section-default.uk-section {
   background-color: var(--bg-panel) !important;
@@ -549,42 +696,13 @@ body input[type=radio]:checked:hover + label::after {
   border-color: var(--border-color) !important;
 }
 
-.uk-svg,
-.uk-svg:not(.uk-preserve) [fill*="#"]:not(.uk-preserve) {
-  fill: rgb(86, 105, 113) !important;
-}
 
-.uk-navbar-container:not(.uk-navbar-transparent) {
-  background-color: var(--bg-panel) !important;
-  color: var(--text-main) !important;
-}
+/* ==========================================================================
+   11. skolaonline.cz — login page
+   ========================================================================== */
 
-.uk-navbar .tm-button-login .uk-button {
-  background-color: #02b589 !important;
-  color: var(--text-main) !important;
-}
-
-.uk-input,
-.uk-select,
-.uk-textarea {
-  background-color: var(--bg-elevated) !important;
-  color: var(--text-main) !important;
-  border-color: var(--border-color) !important;
-}
-
-.uk-input::placeholder,
-.uk-textarea::placeholder {
-  color: var(--text-dim) !important;
-}
-
-.uk-input:focus,
-.uk-select:focus,
-.uk-textarea:focus {
-  border-color: var(--accent) !important;
-  background-color: var(--bg-elevated) !important;
-  color: var(--text-main) !important;
-}
-
+/* Login form panel: dark overlay over its own background (not a filter, so
+   nested content doesn't get recolored) */
 .tm-login-hero .tm-login-form {
   position: relative !important;
 }
@@ -601,10 +719,6 @@ body input[type=radio]:checked:hover + label::after {
 .tm-login-hero .tm-login-form > * {
   position: relative !important;
   z-index: 1 !important;
-}
-
-.tm-login-hero .tm-featured .el-title {
-  color: #ffffff !important;
 }
 
 .tm-login-hero .tm-featured .el-title,
@@ -630,30 +744,10 @@ body input[type=radio]:checked:hover + label::after {
   color: #ffffff !important;
 }
 
-.uk-navbar-nav {
-  color: #ffffff !important;
-}
-
-.uk-navbar-nav > li > a {
-  color: #ffffff !important;
-}
-
-.uk-width-expand.uk-text-right {
-  color: #ffffff !important;
-}
-
-.uk-width-expand.uk-text-right a {
-  color: #ffffff !important;
-}
-
-.uk-panel.uk-text-small.tm-signup.uk-text-center {
-  color: #ffffff !important;
-}
-
-.uk-panel.uk-text-small.tm-signup.uk-text-center a {
-  color: #ffffff !important;
-}
-
+/* "Moduly" section: turquoise photo background darkened via ::before overlay
+   — inline background-image can't be recolored with filter (it would also
+   recolor nested content), so an absolutely-positioned overlay is used
+   instead, with nested content lifted back above it via z-index */
 .tm-login-modules.uk-section-primary [uk-img] {
   position: relative !important;
 }
@@ -673,15 +767,10 @@ body input[type=radio]:checked:hover + label::after {
   z-index: 2 !important;
 }
 
-.uk-drop.uk-navbar-dropdown.uk-open {
-  background-color: var(--bg-panel) !important;
-  color: #ffffff !important;
-  border-color: var(--border-color) !important;
-}
 
-.uk-drop.uk-navbar-dropdown.uk-open a {
-  color: #ffffff !important;
-}
+/* ==========================================================================
+   12. skolaonline.cz — contact pages
+   ========================================================================== */
 
 .tm-contact-info.uk-section-default.uk-section {
   background-color: #1b1d20 !important;
@@ -715,7 +804,7 @@ body input[type=radio]:checked:hover + label::after {
 }
 
 .tm-contact-details.uk-section-default.uk-section a {
-  color: var(--link-color) !important;
+  color: #ffffff !important;
 }
 
 .tm-contact-details.uk-section-default.uk-section h1,
@@ -729,22 +818,12 @@ body input[type=radio]:checked:hover + label::after {
 
 .tm-contact-details.uk-section-default.uk-section p,
 .tm-contact-details.uk-section-default.uk-section span,
-.tm-contact-details.uk-section-default.uk-section li {
-  color: var(--text-dim) !important;
-}
-
-.tm-contact-details.uk-section-default.uk-section p,
-.tm-contact-details.uk-section-default.uk-section span,
 .tm-contact-details.uk-section-default.uk-section li,
 .tm-contact-details.uk-section-default.uk-section .wpcf7-list-item-label {
-  color: var(--text-dim) !important;
-}
-
-.tm-contact-details .uk-tile-muted label {
   color: #ffffff !important;
 }
 
-.tm-contact-details.uk-section-default.uk-section a {
+.tm-contact-details .uk-tile-muted label {
   color: #ffffff !important;
 }
 
@@ -752,23 +831,20 @@ body input[type=radio]:checked:hover + label::after {
   color: #ffffff !important;
 }
 
-.tm-contact-details.uk-section-default.uk-section p,
-.tm-contact-details.uk-section-default.uk-section span,
-.tm-contact-details.uk-section-default.uk-section li,
-.tm-contact-details.uk-section-default.uk-section .wpcf7-list-item-label {
+
+/* ==========================================================================
+   13. skolaonline.cz — support page
+   ========================================================================== */
+
+.tm-support-hero h1 {
   color: #ffffff !important;
 }
 
-.uk-section-default {
-  background-color: #1b1d20 !important;
-  color: var(--text-main) !important;
+.tm-support-hero .uk-text-large a {
+  color: #ffffff !important;
 }
 
 .tm-support-hero .tm-customer-centre p {
-  color: #1b1d20 !important;
-}
-
-.tm-support-hero .tm-user-guides .uk-panel > p {
   color: #1b1d20 !important;
 }
 
@@ -780,20 +856,31 @@ body input[type=radio]:checked:hover + label::after {
   color: #1b1d20 !important;
 }
 
-.el-link.uk-margin-remove-last-child {
+.tm-support-hero .tm-user-guides .uk-panel > p {
   color: #1b1d20 !important;
 }
 
-.tm-support-hero .uk-text-large a {
-  color: #ffffff !important;
+/* "User guides" tile image, darkened the same way as the login "Moduly" photo */
+.tm-support-hero .tm-user-guides .uk-tile-muted > div {
+  position: relative !important;
 }
 
-.tm-support-hero h1 {
-  color: #ffffff !important;
+.tm-support-hero .tm-user-guides .uk-tile-muted > div::before {
+  content: "" !important;
+  position: absolute !important;
+  inset: 0 !important;
+  background-color: rgba(0, 0, 0, 0.5) !important;
+  pointer-events: none !important;
+  z-index: 1 !important;
 }
 
-.uk-button {
-  color: #ffffff !important;
+.tm-support-hero .tm-user-guides .uk-tile-muted > div > * {
+  position: relative !important;
+  z-index: 2 !important;
+}
+
+.el-link.uk-margin-remove-last-child {
+  color: #1b1d20 !important;
 }
 
 .tm-support-newsletter h3 span {
@@ -804,26 +891,30 @@ body input[type=radio]:checked:hover + label::after {
   color: #ffffff !important;
 }
 
-.uk-offcanvas-flip .uk-open > .uk-offcanvas-bar {
-  background-color: #1b1d20 !important;
+
+/* ==========================================================================
+   14. skolaonline.cz — events
+   ========================================================================== */
+
+.tm-events-hero h1 {
+  color: #ffffff !important;
 }
 
-.uk-section > :last-child {
-  background-color: #1b1d20 !important;
+.tm-events-hero .uk-text-large a {
+  color: #ffffff !important;
 }
 
 .tm-events-grid .uk-card {
   background-color: #1b1d20 !important;
 }
 
+.tm-events-grid .el-content .tm-roles,
 .tm-events-grid .el-content .tm-roles + p {
   color: #ffffff !important;
 }
 
-.tm-events-grid .el-content .tm-roles {
-  color: #ffffff !important;
-}
-
+/* Had a background that wouldn't recolor via background-color (likely an
+   inline/site background-image) — cleared outright instead */
 .tm-events-content {
   background-image: none !important;
   background: none !important;
@@ -833,19 +924,12 @@ body input[type=radio]:checked:hover + label::after {
   color: #ffffff !important;
 }
 
-.tm-events-hero .uk-text-large a {
-  color: #ffffff !important;
-}
 
-.tm-events-hero h1 {
-  color: #ffffff !important;
-}
+/* ==========================================================================
+   15. skolaonline.cz — news
+   ========================================================================== */
 
-.tm-news-grid .fs-grid-text-1 a {
-  color: #ffffff !important;
-}
-
-.tm-3-col .el-meta {
+.tm-news-hero h1 {
   color: #ffffff !important;
 }
 
@@ -857,17 +941,22 @@ body input[type=radio]:checked:hover + label::after {
   background-color: #1b1d20 !important;
 }
 
-.uk-search-default:has(.uk-search-icon-flip) .uk-search-input {
-  background-color: #1b1d20 !important;
-}
-
-.tm-news-hero h1 {
+.tm-news-grid .fs-grid-text-1 a {
   color: #ffffff !important;
 }
 
-.uk-section-muted {
-  display: none !important;
+.tm-news-grid .el-meta {
+  color: #ffffff !important;
 }
+
+.tm-3-col .el-meta {
+  color: #ffffff !important;
+}
+
+
+/* ==========================================================================
+   16. skolaonline.cz — homepage sections
+   ========================================================================== */
 
 .tm-home-security .uk-width-large {
   color: #ffffff !important;
@@ -878,10 +967,6 @@ body input[type=radio]:checked:hover + label::after {
 }
 
 .tm-home-news h2 {
-  color: #ffffff !important;
-}
-
-.tm-news-grid .el-meta {
   color: #ffffff !important;
 }
 
@@ -901,7 +986,14 @@ body input[type=radio]:checked:hover + label::after {
   color: #ffffff !important;
 }
 
-.uk-h2 {
+.tm-home-stats {
   color: #ffffff !important;
 }
+
+body .sol-btn-panel {
+  background-color: #1b1d20 !important;
+}
+
+.tm-login-hero .tm-login-form h2 {
+  color: #ffffff !important;
 }
