@@ -1,0 +1,907 @@
+/* ==UserStyle==
+@name         ŠkolaOnline Dark mode
+@version      20260824.22.41
+@namespace    ?
+@description  Dark mode UI for School schedule
+@license      No License
+==/UserStyle== */
+
+/* Bakaláři SOL - Dark Mode */
+
+@-moz-document domain("skolaonline.cz"), domain("bakalari.cz") {
+:root {
+  --bg-main: #1a1b1e;
+  --bg-panel: #232427;
+  --bg-elevated: #2a2b2f;
+  --bg-hover: #33353a;
+  --border-color: #3a3c42;
+  --text-main: #e4e5e7;
+  --text-dim: #9a9ca3;
+  --accent: #4f8fea;
+  --accent-dim: #4f8fea;
+  --today-bg: #3a3018;
+  --today-border: #d4a72c;
+  --weekend-bg: #26272b;
+  --link-color: #6fa8f5;
+}
+
+html, body, .sol-page, .sol-body, .sol-body-content-wrapper,
+.top_frame, .bottom_frame, .content_frame, .main_content_frame {
+  background-color: var(--bg-main) !important;
+  color: var(--text-main) !important;
+}
+
+/* --- Top header bar (logo + "ŠKOLA ONLINE" + school name) --- */
+.top-header,
+.main-menu.publicweb,
+header,
+.logo {
+  background-color: var(--bg-panel) !important;
+  color: var(--text-main) !important;
+  border-color: var(--border-color) !important;
+}
+
+.top-header a,
+.logo a {
+  color: var(--text-main) !important;
+}
+
+/* School title: neutral color, no glow/text-shadow on dark bg */
+.sol-publicweb-school-title,
+#ctl09_lblNazevOrganizace {
+  color: var(--text-main) !important;
+  text-shadow: none !important;
+  font-weight: normal !important;
+}
+
+/* --- Left sidebar --- */
+.left_frame, .sol-body-left,
+.left_frame_panel, .left_frame_area,
+.left_frame_area_header,
+.sol-left-menu, .sol-left-menu-content {
+  background-color: var(--bg-panel) !important;
+  color: var(--text-main) !important;
+  border-color: var(--border-color) !important;
+}
+
+.sol-left-menu-header {
+  background-color: var(--bg-elevated) !important;
+  color: var(--text-main) !important;
+  border-color: var(--border-color) !important;
+}
+
+.sol-left-menu-header-selected {
+  background-color: var(--accent-dim) !important;
+  color: #ffffff !important;
+}
+
+.menu_link, a.menu_link {
+  color: var(--link-color) !important;
+}
+
+.menu_link:hover {
+  background-color: var(--bg-hover) !important;
+}
+
+/* --- Content header --- */
+.sol-body-content-header,
+.sol-body-content-header-title,
+.sol-body-content-top {
+  background-color: var(--bg-panel) !important;
+  color: var(--text-main) !important;
+  border-color: var(--border-color) !important;
+}
+
+/* --- Class dropdown selector / inputs --- */
+.InputField, select, input[type="text"] {
+  background-color: var(--bg-elevated) !important;
+  color: var(--text-main) !important;
+  border: 1px solid var(--border-color) !important;
+}
+
+.FieldLabel, .SpaceAfterFieldLabel, #panCB label, #panCB span {
+  color: var(--text-main) !important;
+}
+
+/* --- Generic checkboxes and radio buttons (fallback) --- */
+input[type="checkbox"],
+input[type="radio"] {
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  width: 14px !important;
+  height: 14px !important;
+  background-color: var(--bg-elevated) !important;
+  border: 1px solid var(--text-dim) !important;
+  border-radius: 2px !important;
+  cursor: pointer;
+  position: relative;
+  vertical-align: middle;
+}
+
+input[type="radio"] {
+  border-radius: 50% !important;
+}
+
+input[type="checkbox"]:checked,
+input[type="radio"]:checked {
+  background-color: var(--accent) !important;
+  border-color: var(--accent) !important;
+}
+
+input[type="checkbox"]:checked::after {
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: 1px;
+  width: 4px;
+  height: 8px;
+  border: solid #ffffff;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+input[type="radio"]:checked::after {
+  content: "";
+  position: absolute;
+  left: 3px;
+  top: 3px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #ffffff;
+}
+
+/* --- Radio buttons: Týden / Měsíc (specific IDs, higher priority) --- */
+#calendarPart_kalendar_RBSelectionMode_0,
+#calendarPart_kalendar_RBSelectionMode_1 {
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  width: 14px !important;
+  height: 14px !important;
+  background-color: var(--bg-elevated) !important;
+  border: 1px solid var(--text-dim) !important;
+  border-radius: 50% !important;
+  cursor: pointer;
+  position: relative;
+  vertical-align: middle;
+}
+
+#calendarPart_kalendar_RBSelectionMode_0:checked,
+#calendarPart_kalendar_RBSelectionMode_1:checked {
+  background-color: var(--accent) !important;
+  border-color: var(--accent) !important;
+}
+
+#calendarPart_kalendar_RBSelectionMode_0:checked::after,
+#calendarPart_kalendar_RBSelectionMode_1:checked::after {
+  content: "";
+  position: absolute;
+  left: 3px;
+  top: 3px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #ffffff;
+}
+
+/* --- SpaceBeforeButton checkboxes (Zobrazit sobotu/neděli, Zobrazit názvy skupin) --- */
+.SpaceBeforeButton,
+label.SpaceBeforeButton {
+  color: var(--text-main) !important;
+}
+
+input.SpaceBeforeButton,
+span.SpaceBeforeButton input[type="checkbox"] {
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  width: 14px !important;
+  height: 14px !important;
+  background-color: var(--bg-elevated) !important;
+  border: 1px solid var(--text-dim) !important;
+  border-radius: 2px !important;
+  cursor: pointer;
+  position: relative;
+  vertical-align: middle;
+}
+
+input.SpaceBeforeButton:checked,
+span.SpaceBeforeButton input[type="checkbox"]:checked {
+  background-color: var(--accent) !important;
+  border-color: var(--accent) !important;
+}
+
+input.SpaceBeforeButton:checked::after,
+span.SpaceBeforeButton input[type="checkbox"]:checked::after {
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: 1px;
+  width: 4px;
+  height: 8px;
+  border: solid #ffffff;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+/* --- Mini calendar (left panel) --- */
+.igcal_Control, .ig_Control {
+  background-color: var(--bg-panel) !important;
+  color: var(--text-main) !important;
+}
+
+.igcal_Header, .ig_Header {
+  background-color: var(--bg-elevated) !important;
+  color: var(--text-main) !important;
+}
+
+.igcal_DropDown {
+  background-color: var(--bg-elevated) !important;
+  color: var(--text-main) !important;
+  border: 1px solid var(--border-color) !important;
+}
+
+.igcal_DOW {
+  background-color: var(--bg-elevated) !important;
+  color: var(--text-dim) !important;
+}
+
+.igcal_Day {
+  background-color: var(--bg-panel) !important;
+  color: var(--text-main) !important;
+}
+
+.igcal_OtherMonthDay {
+  color: #55565c !important;
+}
+
+.igcal_WeekendDay {
+  background-color: var(--weekend-bg) !important;
+}
+
+.igcal_TodayDay, .igcal_TodayDay.ig_Selected {
+  background-color: var(--today-bg) !important;
+  color: var(--today-border) !important;
+  font-weight: bold;
+}
+
+.igcal_SelectedDay, .ig_Selected {
+  background-color: var(--accent-dim) !important;
+  color: #ffffff !important;
+}
+
+.igcal_Footer, .ig_Footer {
+  background-color: var(--bg-elevated) !important;
+  border-color: var(--border-color) !important;
+}
+
+.calendarSelectTodayButton {
+  color: var(--link-color) !important;
+}
+
+.ig_Button {
+  background-color: var(--bg-elevated) !important;
+}
+
+.ig_Button img {
+  filter: invert(0.85) !important;
+}
+
+/* --- Rozvrh (timetable) table --- */
+.DctTable, #CCADynamicCalendarTable {
+  background-color: var(--bg-main) !important;
+  border-color: var(--border-color) !important;
+}
+
+.DctTable th {
+  background-color: var(--bg-elevated) !important;
+  color: var(--text-main) !important;
+  border: 1px solid var(--border-color) !important;
+}
+
+.KuvHeaderNadpis {
+  color: var(--text-main) !important;
+  font-weight: bold;
+}
+
+.KuvHeaderText {
+  color: var(--text-dim) !important;
+}
+
+.DctCell, .DctCellBottom {
+  background-color: var(--bg-panel) !important;
+  border: 1px solid var(--border-color) !important;
+}
+
+.RowOdd td, .RowOdd th {
+  background-color: var(--bg-panel) !important;
+}
+
+.RowEven td, .RowEven th {
+  background-color: var(--bg-main) !important;
+}
+
+.KuvSkolniAkceHodina,
+[class*="KuvHodina"],
+[class*="KuvBunka"] {
+  background-color: var(--bg-elevated) !important;
+  color: var(--text-main) !important;
+  border-color: var(--border-color) !important;
+}
+
+.KuvBunkaRozvrhNadpis {
+  color: var(--accent) !important;
+  font-weight: bold;
+}
+
+.KuvBunkaRozvrhText {
+  color: var(--text-dim) !important;
+}
+
+/* Holiday/free-day cells (Prázdniny) */
+.KuvSkolniAkceHodina {
+  background-color: #2e2a1f !important;
+}
+
+.KuvSkolniAkceHodina .KuvBunkaRozvrhNadpis {
+  color: #d4a72c !important;
+}
+
+/* Fixed sticky table header */
+.CCADynamicCalendarTable_FixedTableHeader,
+.CCADynamicCalendarTable_FixedTableHeader th {
+  background-color: var(--bg-elevated) !important;
+  color: var(--text-main) !important;
+  border-color: var(--border-color) !important;
+}
+
+/* --- Footer (address block + customer support block) --- */
+footer, .sol-body-footer, .contact {
+  background-color: var(--bg-panel) !important;
+  color: var(--text-dim) !important;
+  border-color: var(--border-color) !important;
+}
+
+.address, .hotline {
+  color: var(--text-dim) !important;
+}
+
+.address span, .hotline span,
+#ctl12_lblAdresa1, #ctl12_lblAdresa2,
+#ctl12_lblZakaznickaPodpora {
+  color: var(--text-dim) !important;
+}
+
+footer a, .help,
+#ctl12_hlCookies, #ctl12_hlPotrebujetePomoc {
+  color: var(--link-color) !important;
+}
+
+/* Generic link/table fallback */
+a {
+  color: var(--link-color) !important;
+}
+
+table {
+  color: var(--text-main) !important;
+}
+
+.sol-notifications {
+  background-color: var(--bg-panel) !important;
+  color: var(--text-main) !important;
+}
+
+/* --- Tooltip popup (overlib) --- */
+#overDiv,
+#overDiv *,
+.KuvTooltip,
+.KuvTooltip *,
+[id^="overDiv"],
+[id^="overDiv"] * {
+  background-color: var(--bg-elevated) !important;
+  color: var(--text-main) !important;
+  border-color: var(--border-color) !important;
+}
+
+div[style*="visibility"] table,
+div[style*="visibility"] td,
+div[style*="visibility"] tr {
+  background-color: var(--bg-elevated) !important;
+  color: var(--text-main) !important;
+}
+
+/* --- Checkbox: draw the box via ::before, checkmark via ::after, both centered the same way --- */
+body input[type=checkbox] + label {
+  background-image: none !important;
+  position: relative !important;
+}
+
+body input[type=checkbox] + label::before {
+  content: "" !important;
+  display: inline-block !important;
+  position: absolute !important;
+  left: 0 !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  width: 14px !important;
+  height: 14px !important;
+  background-color: var(--bg-elevated) !important;
+  border: 1px solid var(--text-dim) !important;
+  border-radius: 3px !important;
+  box-sizing: border-box !important;
+}
+
+body input[type=checkbox]:checked + label::after {
+  content: "" !important;
+  position: absolute !important;
+  left: 4px !important;
+  top: 50% !important;
+  width: 4px !important;
+  height: 8px !important;
+  margin-top: -6px !important;
+  border: solid #ffffff !important;
+  border-width: 0 2px 2px 0 !important;
+  transform: rotate(45deg) !important;
+}
+
+body input[type=checkbox]:checked + label::before {
+  background-color: var(--accent) !important;
+  border-color: var(--accent) !important;
+}
+
+body input[type=checkbox]:checked:hover + label::before {
+  background-color: #6fa8f5 !important;
+  border-color: #6fa8f5 !important;
+}
+
+/* --- Radio buttons: Týden / Měsíc, drawn via ::before/::after, no SVG dependency --- */
+body input[type=radio] + label {
+  background-image: none !important;
+  position: relative !important;
+}
+
+body input[type=radio] + label::before {
+  content: "" !important;
+  display: inline-block !important;
+  position: absolute !important;
+  left: 0 !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  width: 14px !important;
+  height: 14px !important;
+  background-color: var(--bg-elevated) !important;
+  border: 1px solid var(--text-dim) !important;
+  border-radius: 50% !important;
+  box-sizing: border-box !important;
+}
+
+body input[type=radio]:checked + label::before {
+  background-color: var(--bg-elevated) !important;
+  border-color: var(--accent) !important;
+}
+
+body input[type=radio]:checked + label::after {
+  content: "" !important;
+  position: absolute !important;
+  left: 4px !important;
+  top: 50% !important;
+  width: 6px !important;
+  height: 6px !important;
+  margin-top: -3px !important;
+  border-radius: 50% !important;
+  background-color: var(--accent) !important;
+}
+
+body input[type=radio]:checked:hover + label::before,
+body input[type=radio]:checked:hover + label::after {
+  border-color: #6fa8f5 !important;
+  background-color: #6fa8f5 !important;
+}
+
+::-webkit-scrollbar {
+  width: 8px !important;
+  height: 8px !important;
+}
+
+::-webkit-scrollbar-track {
+  background-color: var(--bg-main) !important;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--bg-elevated) !important;
+  border-radius: 4px !important;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--bg-hover) !important;
+}
+
+::-webkit-scrollbar-corner {
+  background-color: var(--bg-main) !important;
+}
+
+.tm-footer.uk-section-default.uk-section {
+  background-color: var(--bg-panel) !important;
+  color: var(--text-main) !important;
+  border-color: var(--border-color) !important;
+}
+
+.tm-footer.uk-section-default.uk-section a {
+  color: #ffffff !important;
+}
+
+.tm-footer.uk-section-default.uk-section h1,
+.tm-footer.uk-section-default.uk-section h2,
+.tm-footer.uk-section-default.uk-section h3,
+.tm-footer.uk-section-default.uk-section h4,
+.tm-footer.uk-section-default.uk-section h5,
+.tm-footer.uk-section-default.uk-section h6 {
+  color: var(--text-main) !important;
+}
+
+.tm-footer.uk-section-default.uk-section p,
+.tm-footer.uk-section-default.uk-section span,
+.tm-footer.uk-section-default.uk-section li {
+  color: var(--text-dim) !important;
+}
+
+.tm-footer.uk-section-default.uk-section hr,
+.tm-footer.uk-section-default.uk-section .uk-divider-icon {
+  border-color: var(--border-color) !important;
+}
+
+.uk-svg,
+.uk-svg:not(.uk-preserve) [fill*="#"]:not(.uk-preserve) {
+  fill: rgb(86, 105, 113) !important;
+}
+
+.uk-navbar-container:not(.uk-navbar-transparent) {
+  background-color: var(--bg-panel) !important;
+  color: var(--text-main) !important;
+}
+
+.uk-navbar .tm-button-login .uk-button {
+  background-color: #02b589 !important;
+  color: var(--text-main) !important;
+}
+
+.uk-input,
+.uk-select,
+.uk-textarea {
+  background-color: var(--bg-elevated) !important;
+  color: var(--text-main) !important;
+  border-color: var(--border-color) !important;
+}
+
+.uk-input::placeholder,
+.uk-textarea::placeholder {
+  color: var(--text-dim) !important;
+}
+
+.uk-input:focus,
+.uk-select:focus,
+.uk-textarea:focus {
+  border-color: var(--accent) !important;
+  background-color: var(--bg-elevated) !important;
+  color: var(--text-main) !important;
+}
+
+.tm-login-hero .tm-login-form {
+  position: relative !important;
+}
+
+.tm-login-hero .tm-login-form::before {
+  content: "" !important;
+  position: absolute !important;
+  inset: 0 !important;
+  background-color: rgba(0, 0, 0, 0.85) !important;
+  pointer-events: none !important;
+  z-index: 0 !important;
+}
+
+.tm-login-hero .tm-login-form > * {
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+.tm-login-hero .tm-featured .el-title {
+  color: #ffffff !important;
+}
+
+.tm-login-hero .tm-featured .el-title,
+.tm-login-hero h1 {
+  color: #ffffff !important;
+}
+
+.tm-btn-login-ms {
+  color: #ffffff !important;
+}
+
+.el-content.uk-button.uk-button-primary.uk-button-large {
+  background-color: var(--bg-elevated) !important;
+  color: #ffffff !important;
+  border-color: var(--border-color) !important;
+}
+
+.el-title.uk-margin-remove-top.uk-margin-remove-bottom {
+  color: #ffffff !important;
+}
+
+.el-content.uk-button.uk-button-text {
+  color: #ffffff !important;
+}
+
+.uk-navbar-nav {
+  color: #ffffff !important;
+}
+
+.uk-navbar-nav > li > a {
+  color: #ffffff !important;
+}
+
+.uk-width-expand.uk-text-right {
+  color: #ffffff !important;
+}
+
+.uk-width-expand.uk-text-right a {
+  color: #ffffff !important;
+}
+
+.uk-panel.uk-text-small.tm-signup.uk-text-center {
+  color: #ffffff !important;
+}
+
+.uk-panel.uk-text-small.tm-signup.uk-text-center a {
+  color: #ffffff !important;
+}
+
+.tm-login-modules.uk-section-primary [uk-img] {
+  position: relative !important;
+}
+
+.tm-login-modules.uk-section-primary [uk-img]::before {
+  content: "" !important;
+  position: absolute !important;
+  inset: 0 !important;
+  background-color: rgba(40, 45, 55, 0.85) !important;
+  mix-blend-mode: normal !important;
+  pointer-events: none !important;
+  z-index: 1 !important;
+}
+
+.tm-login-modules.uk-section-primary [uk-img] > * {
+  position: relative !important;
+  z-index: 2 !important;
+}
+
+.uk-drop.uk-navbar-dropdown.uk-open {
+  background-color: var(--bg-panel) !important;
+  color: #ffffff !important;
+  border-color: var(--border-color) !important;
+}
+
+.uk-drop.uk-navbar-dropdown.uk-open a {
+  color: #ffffff !important;
+}
+
+.tm-contact-info.uk-section-default.uk-section {
+  background-color: #1b1d20 !important;
+  color: var(--text-main) !important;
+  border-color: var(--border-color) !important;
+}
+
+.tm-contact-info.uk-section-default.uk-section a {
+  color: var(--link-color) !important;
+}
+
+.tm-contact-info.uk-section-default.uk-section h1,
+.tm-contact-info.uk-section-default.uk-section h2,
+.tm-contact-info.uk-section-default.uk-section h3,
+.tm-contact-info.uk-section-default.uk-section h4,
+.tm-contact-info.uk-section-default.uk-section h5,
+.tm-contact-info.uk-section-default.uk-section h6 {
+  color: var(--text-main) !important;
+}
+
+.tm-contact-info.uk-section-default.uk-section p,
+.tm-contact-info.uk-section-default.uk-section span,
+.tm-contact-info.uk-section-default.uk-section li {
+  color: var(--text-dim) !important;
+}
+
+.tm-contact-details.uk-section-default.uk-section {
+  background-color: #1b1d20 !important;
+  color: var(--text-main) !important;
+  border-color: var(--border-color) !important;
+}
+
+.tm-contact-details.uk-section-default.uk-section a {
+  color: var(--link-color) !important;
+}
+
+.tm-contact-details.uk-section-default.uk-section h1,
+.tm-contact-details.uk-section-default.uk-section h2,
+.tm-contact-details.uk-section-default.uk-section h3,
+.tm-contact-details.uk-section-default.uk-section h4,
+.tm-contact-details.uk-section-default.uk-section h5,
+.tm-contact-details.uk-section-default.uk-section h6 {
+  color: var(--text-main) !important;
+}
+
+.tm-contact-details.uk-section-default.uk-section p,
+.tm-contact-details.uk-section-default.uk-section span,
+.tm-contact-details.uk-section-default.uk-section li {
+  color: var(--text-dim) !important;
+}
+
+.tm-contact-details.uk-section-default.uk-section p,
+.tm-contact-details.uk-section-default.uk-section span,
+.tm-contact-details.uk-section-default.uk-section li,
+.tm-contact-details.uk-section-default.uk-section .wpcf7-list-item-label {
+  color: var(--text-dim) !important;
+}
+
+.tm-contact-details .uk-tile-muted label {
+  color: #ffffff !important;
+}
+
+.tm-contact-details.uk-section-default.uk-section a {
+  color: #ffffff !important;
+}
+
+.tm-contact-hero .uk-text-large a {
+  color: #ffffff !important;
+}
+
+.tm-contact-details.uk-section-default.uk-section p,
+.tm-contact-details.uk-section-default.uk-section span,
+.tm-contact-details.uk-section-default.uk-section li,
+.tm-contact-details.uk-section-default.uk-section .wpcf7-list-item-label {
+  color: #ffffff !important;
+}
+
+.uk-section-default {
+  background-color: #1b1d20 !important;
+  color: var(--text-main) !important;
+}
+
+.tm-support-hero .tm-customer-centre p {
+  color: #1b1d20 !important;
+}
+
+.tm-support-hero .tm-user-guides .uk-panel > p {
+  color: #1b1d20 !important;
+}
+
+.tm-support-hero .tm-customer-centre .tm-email a {
+  color: #1b1d20 !important;
+}
+
+.tm-support-hero .tm-customer-centre .tm-phone a {
+  color: #1b1d20 !important;
+}
+
+.el-link.uk-margin-remove-last-child {
+  color: #1b1d20 !important;
+}
+
+.tm-support-hero .uk-text-large a {
+  color: #ffffff !important;
+}
+
+.tm-support-hero h1 {
+  color: #ffffff !important;
+}
+
+.uk-button {
+  color: #ffffff !important;
+}
+
+.tm-support-newsletter h3 span {
+  color: #ffffff !important;
+}
+
+.tm-support-newsletter .tm-description {
+  color: #ffffff !important;
+}
+
+.uk-offcanvas-flip .uk-open > .uk-offcanvas-bar {
+  background-color: #1b1d20 !important;
+}
+
+.uk-section > :last-child {
+  background-color: #1b1d20 !important;
+}
+
+.tm-events-grid .uk-card {
+  background-color: #1b1d20 !important;
+}
+
+.tm-events-grid .el-content .tm-roles + p {
+  color: #ffffff !important;
+}
+
+.tm-events-grid .el-content .tm-roles {
+  color: #ffffff !important;
+}
+
+.tm-events-content {
+  background-image: none !important;
+  background: none !important;
+}
+
+.tm-events-content .uk-subnav a {
+  color: #ffffff !important;
+}
+
+.tm-events-hero .uk-text-large a {
+  color: #ffffff !important;
+}
+
+.tm-events-hero h1 {
+  color: #ffffff !important;
+}
+
+.tm-news-grid .fs-grid-text-1 a {
+  color: #ffffff !important;
+}
+
+.tm-3-col .el-meta {
+  color: #ffffff !important;
+}
+
+.tm-news-hero .uk-subnav-pill a {
+  color: #ffffff !important;
+}
+
+.tm-news-hero > div {
+  background-color: #1b1d20 !important;
+}
+
+.uk-search-default:has(.uk-search-icon-flip) .uk-search-input {
+  background-color: #1b1d20 !important;
+}
+
+.tm-news-hero h1 {
+  color: #ffffff !important;
+}
+
+.uk-section-muted {
+  display: none !important;
+}
+
+.tm-home-security .uk-width-large {
+  color: #ffffff !important;
+}
+
+.tm-home-security .tm-grid .el-title {
+  color: #ffffff !important;
+}
+
+.tm-home-news h2 {
+  color: #ffffff !important;
+}
+
+.tm-news-grid .el-meta {
+  color: #ffffff !important;
+}
+
+.tm-home-join-us .uk-list p a {
+  color: #ffffff !important;
+}
+
+.tm-home-join-us .uk-width-large {
+  color: #ffffff !important;
+}
+
+.tm-home-modules h2 {
+  color: #ffffff !important;
+}
+
+.tm-home-apps .uk-width-large {
+  color: #ffffff !important;
+}
+
+.uk-h2 {
+  color: #ffffff !important;
+}
+}
